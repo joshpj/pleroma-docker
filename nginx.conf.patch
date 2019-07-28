@@ -1,0 +1,24 @@
+13c13
+<     server_name    example.tld;
+---
+>     server_name    localhost;
+36c36
+<     server_name example.tld;
+---
+>     server_name localhost;
+42,44c42,44
+<     ssl_trusted_certificate   /etc/letsencrypt/live/example.tld/chain.pem;
+<     ssl_certificate           /etc/letsencrypt/live/example.tld/fullchain.pem;
+<     ssl_certificate_key       /etc/letsencrypt/live/example.tld/privkey.pem;
+---
+> #    ssl_trusted_certificate   /etc/letsencrypt/live/example.tld/chain.pem;
+>     ssl_certificate           /etc/nginx/conf.d/cert.pem;
+>     ssl_certificate_key       /etc/nginx/conf.d/key.pem;
+76c76
+<         proxy_pass http://127.0.0.1:4000;
+---
+>         proxy_pass http://pleroma:4000;
+94c94
+<         proxy_pass http://localhost:4000;
+---
+>         proxy_pass http://pleroma:4000;

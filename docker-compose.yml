@@ -1,0 +1,32 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - ./volumes/config/nginx:/etc/nginx/conf.d:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: on-failure
+    depends_on:
+      - pleroma
+  pleroma:
+    image: pleroma
+    build:
+      context: .
+      args:
+        RELEASE: develop
+    volumes:
+      - ./volumes/content/uploads:/var/lib/pleroma/uploads
+      - ./volumes/content/static:/var/lib/pleroma/static
+      - ./volumes/config:/etc/pleroma:ro
+    restart: on-failure
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data/pgdata
+    restart: on-failure

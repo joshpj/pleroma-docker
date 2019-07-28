@@ -1,0 +1,8 @@
+version: "2"
+services:
+  pleroma:
+    volumes:
+      - ./volumes/config:/tmp/config
+  db:
+    volumes:
+      - ./volumes/config:/tmp/config:ro

@@ -4,6 +4,7 @@ Docker config for Pleroma OTP releases
 ## Requirements:
 * docker
 * docker-compose
+* openssl
 
 ## Setup:
 ```
@@ -13,15 +14,20 @@ You'll be prompted to answer the Pleroma config questions as part of setup.
 Two questions are particularly important to answer correctly.
 
 > What is the hostname of your database?
+
 Make sure to answer "db" instead of the default "localhost":
 
 > What ip will the app listen to (leave it if you are using the default setup with nginx)?
+
 Make sure to answer "0.0.0.0" instead of the default "127.0.0.1":
 
-If you want to change your hostname or ports, you will need to edit:
-* `docker-compose.yml`
-* `volumes/config/nginx/pleroma.conf` (after generating the config)
+Setup will generate a self-signed certificate for nginx to use.
 
+If you want to change the certificate, hostname, or ports, you will need to edit:
+* `volumes/config/nginx/pleroma.conf` (after setup generates the initial config)
+
+If you want to change ports or your host's listen addresses, you will also need to edit:
+* `docker-compose.yml`
 
 ## Starting the server
 ```

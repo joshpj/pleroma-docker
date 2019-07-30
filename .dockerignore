@@ -1,0 +1,4 @@
+# Ignore everything
+**
+# But include the Dockerfile itself
+!Dockerfile
